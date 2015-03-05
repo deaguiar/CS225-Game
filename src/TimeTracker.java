@@ -21,13 +21,21 @@ public class TimeTracker implements ActionListener {
     private byte maxMilliseconds = 99;
     private byte minMilliseconds = 0;
 //
+<<<<<<< HEAD
     private byte startTime = 0;
     private byte endTime;
+=======
+    private byte maxSeconds = 60;
+>>>>>>> 02a8c19e58e25f38bb7c759a0f0a9e1eafccaefc
 
     // Countdown to Starting Game
     private Timer startTimer;
     private int startTimerDelay = 1;
+<<<<<<< HEAD
     private int countDownToStart = 5000;
+=======
+    private int initialMilliSecondsToStart = 5000;
+>>>>>>> 02a8c19e58e25f38bb7c759a0f0a9e1eafccaefc
     private int milliSecondsToStart;
 
     // Time Over Mechanics
