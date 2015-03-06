@@ -48,6 +48,22 @@ public class ScoreKeeper {
         return s;
     }
 
+    /**
+     * returns all the scores of 1 car
+     * @return
+     */
+    public String getCarScores(int i){
+        String s = "Car #"+ Integer.toString(i);
+
+        for(int[] race: scorePerRaceList) {
+
+                s += " Time: " + Integer.toString(race[i]) + "\n";
+
+        }
+
+        return s;
+    }
+
 
 
     //Getter and Setter
