@@ -16,16 +16,20 @@ public class TimeTracker implements ActionListener {
 
     private DecimalFormat timeFormatter = new DecimalFormat("00");
 
+    //mechanism to help display the timer for test
     private byte timeRemainingSeconds;
     private byte timeRemainingMilliseconds;
     private byte maxMilliseconds = 99;
     private byte minMilliseconds = 0;
-//
+
+    private byte startTime = 0;
+    private byte endTime;
     private byte maxSeconds = 60;
 
     // Countdown to Starting Game
-    private Timer startTimer;
-    private int startTimerDelay = 1;
+    private static Timer startTimer;
+    private static int startTimerDelay = 1;
+    private int countDownToStart = 5000;
     private int initialMilliSecondsToStart = 5000;
     private int milliSecondsToStart;
 
@@ -57,6 +61,7 @@ public class TimeTracker implements ActionListener {
         //main Panel
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
+
 
         //Top Panel build
         topPanel = new JPanel();
@@ -209,6 +214,8 @@ public class TimeTracker implements ActionListener {
      */
     public static void main(String[] args) {
         TimeTracker test = new TimeTracker();
+        startTimer = new Timer(startTimerDelay,new TimeTracker());
+        startTimer.start();
     }
 
 }//End of TimeTracker.java
