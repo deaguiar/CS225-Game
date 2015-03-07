@@ -11,6 +11,7 @@ public class Environment {
 
     public Environment(){
         scoreKeeper = new ScoreKeeper();
+        scores = new int[4];
 
     }
 
