@@ -59,10 +59,10 @@ public class Display extends JFrame{
         text2 = new JTextArea();
         
     // ------------>car images to be used in the Car class<------------------
-        ImageIcon img = new ImageIcon("Car_image_UK-small.gif");
-        ImageIcon img2 = new ImageIcon("car2-small.gif");
-        ImageIcon img3 = new ImageIcon("car3-small.gif");
-        ImageIcon img4 = new ImageIcon("car4-small.gif");
+        ImageIcon img = new ImageIcon("./images/Car1-small.gif");
+        ImageIcon img2 = new ImageIcon("./images/car2-small.gif");
+        ImageIcon img3 = new ImageIcon("./images/car3-small.gif");
+        ImageIcon img4 = new ImageIcon("./images/car4-small.gif");
     
 
      /* ----------------------------------------------------
@@ -160,7 +160,7 @@ public class Display extends JFrame{
        
         public void actionPerformed(ActionEvent event){
            
-              img = new ImageIcon("car_image.jpg");
+              img = new ImageIcon("./images/car1-big.png");
               label= new JLabel(img);
               JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
            }
@@ -175,7 +175,7 @@ public class Display extends JFrame{
 
         public void actionPerformed(ActionEvent event){
            
-              img = new ImageIcon("car2.jpg");
+              img = new ImageIcon("./images/car2-big.png");
               label= new JLabel(img);
               JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
            }
@@ -190,7 +190,7 @@ public class Display extends JFrame{
 
         public void actionPerformed(ActionEvent event){
            
-              img = new ImageIcon("car3.jpg");
+              img = new ImageIcon("./images/car3-big.png");
               label= new JLabel(img);
               JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
            }
@@ -205,7 +205,7 @@ public class Display extends JFrame{
 
         public void actionPerformed(ActionEvent event){
            
-              img = new ImageIcon("car4.png");
+              img = new ImageIcon("./images/car4-big.png");
               label= new JLabel(img);
               JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
            }
