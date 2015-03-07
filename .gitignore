@@ -16,3 +16,10 @@ hs_err_pid*
 out/
 *.iml
 
+# netbean
+nbproject/
+build/
+*.xml
+*.mf
+
+

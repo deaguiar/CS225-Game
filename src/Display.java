@@ -160,7 +160,7 @@ public class Display extends JFrame{
        
         public void actionPerformed(ActionEvent event){
            
-              img = new ImageIcon("car1-big.gif");
+              img = new ImageIcon("car_image.jpg");
               label= new JLabel(img);
               JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
            }
@@ -175,7 +175,7 @@ public class Display extends JFrame{
 
         public void actionPerformed(ActionEvent event){
            
-              img = new ImageIcon("car2-big.gif");
+              img = new ImageIcon("car2.jpg");
               label= new JLabel(img);
               JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
            }
@@ -190,7 +190,7 @@ public class Display extends JFrame{
 
         public void actionPerformed(ActionEvent event){
            
-              img = new ImageIcon("car3-big.gif");
+              img = new ImageIcon("car3.jpg");
               label= new JLabel(img);
               JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
            }
@@ -205,7 +205,7 @@ public class Display extends JFrame{
 
         public void actionPerformed(ActionEvent event){
            
-              img = new ImageIcon("car4-big.gif");
+              img = new ImageIcon("car4.png");
               label= new JLabel(img);
               JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
            }
