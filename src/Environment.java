@@ -1,41 +1,140 @@
+import java.util.Random;
 import java.util.ArrayList;
 
 /**
- * Created by catherinehuang on 3/1/15.
+ * Created by catherine huang on 3/1/15.
+ *
+ * @modified by Sean Johnston
+ * @3/7/2015
  */
 public class Environment {
 
-    //for keeping track of all the scores.
-    private ScoreKeeper scoreKeeper;
-    private int[] scores;
+    private Car[] garage;
+    private Track[] tracks;
+    private String[] carNames = {"BRITISH MOTOR COMPANY", "FAST AND FURIOUS", "SCOOBY GANG", "SPEEDY CADDY"};
+    private String[] trackNames = {"Boston", "New York", "Philidelphia", "Washington D.C."};
+    private Random random;
+    private ScoreKeeper sk;
 
     public Environment(){
-        scoreKeeper = new ScoreKeeper();
-        scores = new int[4];
+        random = new Random();
+
+        populateGarage();
+        populateTracks();
+
+        sk = new ScoreKeeper();
+
+        beginRace();
+
+        calculateWinner();
 
     }
 
-    //Methods for calculating the times
-    //gets the track length
-    //gets every car's speed
-    //calculate and store all the times in scores. and send it to ScoreKeeper
-    public void scoresPerRace(){
-
-    }
 
     /**
-     * Set the Scores for current race
-     * @return
+     *
      */
-    public int[] getScores() {
-        return scores;
+    public void populateGarage()
+    {
+        garage = new Car[4];
+        int randomSpeed;
+        Car car;
+
+        for(int i= 0; i < garage.length; i++)
+        {
+            //Get a random number between 5 and 10 to use as the random speed of a car
+            randomSpeed = random.nextInt(10);
+            if(randomSpeed < 5){
+                randomSpeed = randomSpeed +5;
+            }
+
+            car = new Car(carNames[i], randomSpeed);
+            garage[i] = car;
+
+            System.out.println(car.getName() +" has speed "+ car.getSpeed());
+
+
+        }
+
+        System.out.println("\n");
     }
 
-    /**
-     * get the score of the current race
-     * @param scores
-     */
-    public void setScores(int[] scores) {
-        this.scores = scores;
+    public void populateTracks()
+    {
+        tracks = new Track[4];
+        int randomLength;
+        Track track;
+
+        for(int i= 0; i < tracks.length; i++)
+        {
+            //Get a random number between 60 and 100 to use as the length of a track
+            randomLength = random.nextInt(100);
+            if(randomLength < 60)
+            {
+                randomLength = randomLength + 60;
+            }
+
+            track = new Track(trackNames[i], randomLength);
+
+            tracks[i] = track;
+
+            System.out.println( track.getName() +" has length "+ track.getLength() );
+        }
+
+        System.out.println("\n");
     }
+
+    public void beginRace()
+    {
+        int [] raceTimes = new int[garage.length];
+        int newTime;
+        Car car;
+
+        for(Track track: tracks)
+        {
+            for(int i= 0; i < garage.length; i++)
+            {
+                car = garage[i];
+
+                newTime = track.getLength() / car.getSpeed();
+
+                raceTimes[i] = newTime;
+
+                System.out.println(car.getName() + " raced " +track.getName()+ " in " +newTime+ " hours.");
+            }
+
+            System.out.println("\n");
+            sk.addRaceScores(raceTimes);
+        }
+    }
+
+
+    public void calculateWinner()
+    {
+        ArrayList<int[]> scoreList = sk.getScorePerRaceList();
+        int[] timeTotals = new int[garage.length];
+        int time;
+
+        for(int[] timeArray: scoreList)
+        {
+            for(int i = 0; i < timeTotals.length; i++)
+            {
+                time = timeTotals[i] + timeArray[i];
+
+                timeTotals[i] = time;
+            }
+        }
+
+
+        //Print final results
+        Car car;
+        for(int i= 0; i < timeTotals.length; i++)
+        {
+            car = garage[i];
+            time = timeTotals[i];
+
+            System.out.println( car.getName() +"'s total time was " +time);
+        }
+    }
+
 }
