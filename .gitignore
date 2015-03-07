@@ -21,5 +21,6 @@ nbproject/
 build/
 *.xml
 *.mf
+*.DS_Store
 
 
