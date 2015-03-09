@@ -96,12 +96,13 @@ public class Environment {
      */
     public void beginRace()
     {
-        int [] raceTimes = new int[garage.length];
+        int [] raceTimes;
         int newTime;
         Car car;
 
         for(Track track: tracks)
         {
+            raceTimes= new int[garage.length];
             for(int i= 0; i < garage.length; i++)
             {
                 car = garage[i];
