@@ -26,12 +26,14 @@ public class Display extends JFrame{
     private TitledBorder title1,title2;
     private JLabel label,label2;
     private BufferedImage image;
+    private RaceDisplay rd;
    
 
     
     public Display() {
         
         super("CAR GAME");
+        rd = new RaceDisplay();
         
    /* ---------------------------------
     *            BOARD PANELS
@@ -43,6 +45,7 @@ public class Display extends JFrame{
        
          //center panel uses default layout
         center = new JPanel();
+        
       
         //left panel uses a different layout
         left = new JPanel();
@@ -84,7 +87,7 @@ public class Display extends JFrame{
        right.setBorder(title1);
        left.setBorder(title2);
    
-   
+      
    /* ----------------------------------------------------
     * This TextArea is added to the right Panel and it where
     * the result will be displayed
@@ -110,9 +113,9 @@ public class Display extends JFrame{
      --------------------------------------------------------*/
         add(right,BorderLayout.EAST);
         add(left,BorderLayout.WEST);
-        add(center,BorderLayout.CENTER);
         add(south,BorderLayout.SOUTH);
-        
+        add(BorderLayout.CENTER,new RaceDisplay());
+       
   /* -------------------------------------------------
    *        Gives actions to the buttons
    ---------------------------------------------------- */
@@ -139,9 +142,11 @@ public class Display extends JFrame{
     private class Start implements ActionListener{
         ImageIcon imgTrack;
         public void actionPerformed(ActionEvent event){
-            imgTrack = new ImageIcon("track1.jpg");
-            label2.setIcon(imgTrack);
-            center.add(label2);
+            //imgTrack = new ImageIcon("./images/track1.jpg");
+            
+            
+            
+            
         }  
     }
      /**
@@ -213,9 +218,10 @@ public class Display extends JFrame{
            
     }
     
-      public static void main(String[] args) {
+     public static void main(String[] args) {
         Display d = new Display(); 
+        RaceDisplay rd = new RaceDisplay();
       
                
-    }
+   }
 }
