@@ -57,4 +57,6 @@ public class RaceDisplay extends JPanel implements ActionListener{
        }
        repaint();
     }
+
+
 }

@@ -32,7 +32,7 @@ public class Environment {
 
 
     /**
-     *
+     * Create the cars to be put into Tracks
      */
     public void populateGarage()
     {
@@ -59,6 +59,9 @@ public class Environment {
         System.out.println("\n");
     }
 
+    /**
+     * Create the Tracks for race
+     */
     public void populateTracks()
     {
         tracks = new Track[4];
@@ -84,6 +87,10 @@ public class Environment {
         System.out.println("\n");
     }
 
+    /**
+     * Place cars into Track
+     * calculates the time for each car to finish the races.
+     */
     public void beginRace()
     {
         int [] raceTimes = new int[garage.length];
@@ -100,6 +107,8 @@ public class Environment {
 
                 raceTimes[i] = newTime;
 
+                //needs to put the time into scorekeeper
+
                 System.out.println(car.getName() + " raced " +track.getName()+ " in " +newTime+ " hours.");
             }
 
@@ -109,9 +118,16 @@ public class Environment {
     }
 
 
+    /**
+     * Take all the times each car use to finish all races
+     * then calculates the total time,
+     * sort the time from lowest to highest for displaying the winners.
+     */
     public void calculateWinner()
     {
+        //taking the list of time scores from scorekeeper
         ArrayList<int[]> scoreList = sk.getScorePerRaceList();
+        //temporary array to store the total times
         int[] timeTotals = new int[garage.length];
         int time;
 
@@ -127,6 +143,7 @@ public class Environment {
 
 
         //Print final results
+        //isn't this going to be store in scorekeeper?
         Car car;
         for(int i= 0; i < timeTotals.length; i++)
         {
