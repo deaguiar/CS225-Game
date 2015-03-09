@@ -24,6 +24,9 @@ public class Car
         speed = s;
     }
 
+    /**
+     * return the speed of this car
+     * /
     public int getSpeed()
     {
         return speed;
