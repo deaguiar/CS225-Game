@@ -16,6 +16,9 @@ public class Environment {
     private Random random;
     private ScoreKeeper sk;
 
+    /**
+     * Constructor
+     */
     public Environment(){
         random = new Random();
 
@@ -154,4 +157,4 @@ public class Environment {
         }
     }
 
-}
+}//End of Environment.java

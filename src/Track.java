@@ -1,8 +1,8 @@
 /**
  * A track is where car's race. Each track has a length and a name
  *
- * @author (your name)
- * @version (a version number or a date)
+ * Created by Sean Johnston
+ *
  */
 public class Track
 {
@@ -51,5 +51,5 @@ public class Track
         }
         return false;
     }
-}
+}//End of Track.java
 

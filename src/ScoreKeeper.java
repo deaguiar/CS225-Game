@@ -64,6 +64,19 @@ public class ScoreKeeper {
         return s;
     }
 
+    /**
+     * returns all the scores of 1 race
+     * @return String
+     * @param i: int
+     */
+    public String getRaceScores(int i) {
+        String s = "Race " + Integer.toString(i);
+        if(i< scorePerRaceList.size()){
+
+        }
+
+        return s;
+    }
 
 
     //Getter and Setter
