@@ -26,27 +26,45 @@ public class Car
 
     /**
      * return the speed of this car
-     * /
+     * @return int: speed of car
+     */
     public int getSpeed()
     {
         return speed;
     }
 
+    /**
+     * return the name of the car
+     * @return String: name of car
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * set the name of the car
+     * @param n : String
+     */
     public void setName(String n)
     {
         name = n;
     }
 
+    /**
+     * set the speed of this car
+     * @param s: int
+     */
     public void setSpeed(int s)
     {
         speed = s;
     }
 
+    /**
+     *
+     * @param c
+     * @return
+     */
     public boolean equals(Car c)
     {
         if( name.equals(c.getName()) ){

@@ -1,3 +1,3 @@
-# CS241-Game-
-Car game 
-Group project
+# CS225-Car Game-
+race car game
+

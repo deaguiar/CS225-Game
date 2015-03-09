@@ -117,7 +117,7 @@ public class Environment {
             }
 
             System.out.println("\n");
-            sk.addRaceScores(raceTimes);
+            sk.setRaceScores(raceTimes);
         }
     }
 
