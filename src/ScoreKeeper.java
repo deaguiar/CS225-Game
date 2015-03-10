@@ -63,7 +63,7 @@ public class ScoreKeeper {
         for(int[] race: scorePerRaceList) {
             s += trackNameList[i]+":\n";
             for(int j=0; j<race.length;j++) {
-                s += carNameList[j] + " Time: " + Integer.toString(race[j]) + " seconds.\n";
+                s += carNameList[j] + " Time: " + Integer.toString(race[j]) + " hours.\n";
             }
             i++;
         }
@@ -101,7 +101,7 @@ public class ScoreKeeper {
         for(int r = 0; r < scorePerRaceList.size();r++) {
             int[] race = scorePerRaceList.get(r);
             //if the car exist
-            s += "Race at " + trackNameList[r] + " Time: " + Integer.toString(race[i]) + " seconds\n";
+            s += "Race at " + trackNameList[r] + " Time: " + Integer.toString(race[i]) + " hours\n";
 
         }
 
@@ -146,7 +146,7 @@ public class ScoreKeeper {
     public String getFinalRankList(){
         String temp = "";
         for(int i = 0; i<finalRankList.size();i++){
-            temp += carNameList[i] + "'s total time: " + Integer.toString(finalRankList.get(i)) + " seconds\n";
+            temp += carNameList[i] + "'s total time: " + Integer.toString(finalRankList.get(i)) + " hours\n";
         }
         return temp;
     }
@@ -163,7 +163,7 @@ public class ScoreKeeper {
             int[] tempScores = scorePerRaceList.get(i);
 
             for(int a = 0; a < tempScores.length;a++) {
-                s += carNameList[a] + ": "+ Integer.toString(tempScores[a]) + " seconds.\n";
+                s += carNameList[a] + ": "+ Integer.toString(tempScores[a]) + " hours.\n";
             }
         }
         else {
