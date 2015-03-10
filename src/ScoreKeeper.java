@@ -175,13 +175,19 @@ public class ScoreKeeper {
         return s;
     }
 
-    public void findWinner(){
+    public String findWinner(){
         //create a temp int array to get the number of cars per race
-        int[] tempintList = scorePerRaceList.get(0);
-
-        for(int i = 0; i< tempintList.length;i++) {
-
+        int a = carNameList.length;
+        int min = finalRankList.get(0);
+        int index = 0;
+        for(int i = 0; i<a; i++){
+            if(min > finalRankList.get(i)){
+                min = finalRankList.get(i);
+                index = i;
+            }
         }
+
+        return "The Winner is " + carNameList[index] + " with total time of " + finalRankList.get(index);
 
     }
 
@@ -193,7 +199,7 @@ public class ScoreKeeper {
         int[] r3_test = {39,23,103,54};
         String[] carNames = {"BRITISH MOTOR COMPANY", "FAST AND FURIOUS", "SCOOBY GANG", "SPEEDY CADDY"};
         String[] trackNames = {"Boston", "New York", "Philidelphia", "Washington D.C."};
-        int[] speeds = {60,102,48,80};
+        int[] speeds = {88,102,48,160};
         int[] lengths = {2000,3040,3948,1800};
 
 //        sk.setRaceScores(r1_test);
@@ -205,13 +211,13 @@ public class ScoreKeeper {
         sk.setTrackLength(lengths);
         sk.calculateRaceTime();
         sk.setFinalRankList();
-        System.out.print(sk.getSingleCarScores(3));
+//        System.out.print(sk.getSingleCarScores(3));
 //        System.out.print(sk.getSingleRaceScores(1));
-        System.out.print(sk.getTotalScorePerCar(3));
+//        System.out.print(sk.getTotalScorePerCar(3));
         System.out.print(sk.getFinalRankList());
-        System.out.print("\n"+sk.getAllRaceScores());
+//        System.out.print("\n"+sk.getAllRaceScores());
 //        System.out.print(sk.getAllRaceScores());
-
+        System.out.print(sk.findWinner());
 
 
     }
