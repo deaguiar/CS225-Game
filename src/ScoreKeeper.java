@@ -6,6 +6,8 @@ import java.util.ArrayList;
  * It also contains methods to decide and rank the winner of the race.
  *
  * Created by Catherine Huang on 3/1/15.
+ *
+ * update 3/10/15.
  */
 public class ScoreKeeper {
 
