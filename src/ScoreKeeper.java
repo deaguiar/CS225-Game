@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.util.ArrayList;
 
 /**
@@ -215,5 +214,5 @@ public class ScoreKeeper {
 //        System.out.print(sk.getAllRaceScores());
         System.out.print(sk.findWinner());
     }//end of test
-    
+
 }//End of ScoreKeeper.java
