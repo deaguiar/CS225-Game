@@ -29,7 +29,7 @@ public class Environment {
 
         beginRace();
 
-        calculateWinner();
+//        calculateWinner();
 
     }
 
@@ -127,35 +127,35 @@ public class Environment {
      * then calculates the total time,
      * sort the time from lowest to highest for displaying the winners.
      */
-    public void calculateWinner()
-    {
-        //taking the list of time scores from scorekeeper
-        ArrayList<int[]> scoreList = sk.getScorePerRaceList();
-        //temporary array to store the total times
-        int[] timeTotals = new int[garage.length];
-        int time;
-
-        for(int[] timeArray: scoreList)
-        {
-            for(int i = 0; i < timeTotals.length; i++)
-            {
-                time = timeTotals[i] + timeArray[i];
-
-                timeTotals[i] = time;
-            }
-        }
-
-
-        //Print final results
-        //isn't this going to be store in scorekeeper?
-        Car car;
-        for(int i= 0; i < timeTotals.length; i++)
-        {
-            car = garage[i];
-            time = timeTotals[i];
-
-            System.out.println( car.getName() +"'s total time was " +time);
-        }
-    }
+//    public void calculateWinner()
+//    {
+//        //taking the list of time scores from scorekeeper
+//        ArrayList<int[]> scoreList = sk.getScorePerRaceList();
+//        //temporary array to store the total times
+//        int[] timeTotals = new int[garage.length];
+//        int time;
+//
+//        for(int[] timeArray: scoreList)
+//        {
+//            for(int i = 0; i < timeTotals.length; i++)
+//            {
+//                time = timeTotals[i] + timeArray[i];
+//
+//                timeTotals[i] = time;
+//            }
+//        }
+//
+//
+//        //Print final results
+//        //isn't this going to be store in scorekeeper?
+//        Car car;
+//        for(int i= 0; i < timeTotals.length; i++)
+//        {
+//            car = garage[i];
+//            time = timeTotals[i];
+//
+//            System.out.println( car.getName() +"'s total time was " +time);
+//        }
+//    }
 
 }//End of Environment.java

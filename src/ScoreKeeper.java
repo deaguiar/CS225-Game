@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * It keep tracks of the time scores of each car in every race, and stores them to be display.
  * It also contains methods to decide and rank the winner of the race.
  *
- * Created by catherine huang on 3/1/15.
+ * Created by Catherine Huang on 3/1/15.
  */
 public class ScoreKeeper {
 
@@ -14,28 +14,30 @@ public class ScoreKeeper {
     //storing the scores
     private ArrayList<int[]> scorePerRaceList;
     private ArrayList<Integer> finalRankList;
-    private int[] carSpeeds;
-    private String[] carNames;
-    private String[] trackNames;
-
-    //
+    private int[] carSpeeds = new int[4];
+    private String[] carNameList = new String[4];
+    private String[] trackNameList = new String[4];
+    private int[] trackLengthList = new int[4];
+//    private Car[] cars;
+//    private Track[] tracks;
 
     /**
      * Constructor
      */
     public ScoreKeeper() {
+        //initialize variables
         scorePerRaceList = new ArrayList<int[]>();
         finalRankList = new ArrayList<Integer>();
 
     }
 
-    /**
-     * set the speeds of all the cars
-     * @param speed: int[]
-     */
-    public void setCarSpeeds(int[] speed){
-        this.carSpeeds = speed;
-    }
+    public void setCarSpeeds(int[] speed){ this.carSpeeds = speed; }
+
+    public void setTrackName(String[] name) { this.trackNameList = name; }
+
+    public void setCarNames(String[] name) { this.carNameList = name; }
+
+    public void setTrackLength(int[] length){ this.trackLengthList = length; }
 
     /**
      * adding all scores in 1 race into the scorePerRaceList
@@ -55,7 +57,7 @@ public class ScoreKeeper {
 
         for(int[] race: scorePerRaceList) {
             for(int i=0; i<race.length;i++) {
-                s += "Car #"+ Integer.toString(i) + " Time: " + Integer.toString(race[i]) + "\n";
+                s += carNameList[i] + " Time: " + Integer.toString(race[i]) + "\n";
             }
         }
 
@@ -63,21 +65,83 @@ public class ScoreKeeper {
     }
 
     /**
+     * calculates every car's time in every race
+     */
+    public void calculateRaceTime(){
+
+        for(int l: trackLengthList) {
+            int i = 0;
+            int[] tempTimeList = new int[carSpeeds.length];
+
+            for(int s: carSpeeds) {
+                int tempTime = l/s;
+                tempTimeList[i] = tempTime;
+                i++;
+            }
+            scorePerRaceList.add(tempTimeList);
+        }
+    }
+
+    /**
      * returns all the scores of 1 car
      * @return String
-     * @param i: int
+     * @param i
      */
     public String getSingleCarScores(int i){
-        String s = "Car #"+ Integer.toString(i)+"\n";
+        String s = carNameList[i] +":\n";
 
         //check all race scores
-        for(int[] race: scorePerRaceList) {
+        for(int r = 0; r < scorePerRaceList.size();r++) {
+            int[] race = scorePerRaceList.get(r);
             //if the car exist
-            s += " Time: " + Integer.toString(race[i]) + "\n";
+            s += "Race at " + trackNameList[r] + " Time: " + Integer.toString(race[i]) + " seconds\n";
 
         }
 
         return s;
+    }
+
+    /**
+     * calculate total time of 1 car
+     * @param i
+     */
+    public int getTotalScorePerCar(int i) {
+        int totalTemp = 0;
+
+        for(int r = 0; r < scorePerRaceList.size();r++) {
+            int[] race = scorePerRaceList.get(r);
+            //if the car exist
+            totalTemp += race[i];
+
+        }
+
+        return totalTemp;
+
+    }
+
+    /**
+     * set the final score list
+     */
+    public void setFinalRankList(){
+        int tempFinal = 0;
+        //for every car
+        for(int t=0; t < carNameList.length;t++){
+            tempFinal = getTotalScorePerCar(t);
+            finalRankList.add(tempFinal);
+        }
+
+    }
+
+    /**
+     * get the final scores
+     * @return String
+     */
+    public String getFinalRankList(){
+        String temp = "";
+        for(int i = 0; i<finalRankList.size();i++){
+            temp += carNameList[i] + "'s total time: " + Integer.toString(finalRankList.get(i)) + " seconds\n";
+        }
+        return temp;
     }
 
     /**
@@ -86,13 +150,13 @@ public class ScoreKeeper {
      * @param i: int
      */
     public String getSingleRaceScores(int i) {
-        String s = "Race " + Integer.toString(i) + ":\n";
+        String s = "Race at " + trackNameList[i] + ":\n";
 
-        if(i< scorePerRaceList.size()){
+        if(i < scorePerRaceList.size()){
             int[] tempScores = scorePerRaceList.get(i);
 
-            for(int score: tempScores) {
-                s += Integer.toString(score) + "\n";
+            for(int a = 0; a < tempScores.length;a++) {
+                s += carNameList[a] + ": "+ Integer.toString(tempScores[a]) + " seconds.\n";
             }
         }
         else {
@@ -105,38 +169,39 @@ public class ScoreKeeper {
     public void findWinner(){
         //create a temp int array to get the number of cars per race
         int[] tempintList = scorePerRaceList.get(0);
-        //
+
         for(int i = 0; i< tempintList.length;i++) {
 
         }
 
     }
 
-    //Getter and Setter
 
-    /**
-     * Return the list contains scores of every cars in all races
-     * @return ArrayList
-     */
-    public ArrayList<int[]> getScorePerRaceList() {
-        return scorePerRaceList;
-    }
-
-    /**
-     * Set the list of scores of every cars in all races
-     * @param scorePerRaceList
-     */
-    public void setScorePerRaceList(ArrayList<int[]> scorePerRaceList) {
-        this.scorePerRaceList = scorePerRaceList;
-    }
-
-    /**
-     * Returns the calculated ranking list
-     * @return
-     */
-    public ArrayList<Integer> getFinalRankList() {
-        return finalRankList;
-    }
+//    //Getter and Setter
+//
+//    /**
+//     * Return the list contains scores of every cars in all races
+//     * @return ArrayList
+//     */
+//    public ArrayList<int[]> getScorePerRaceList() {
+//        return scorePerRaceList;
+//    }
+//
+//    /**
+//     * Set the list of scores of every cars in all races
+//     * @param scorePerRaceList
+//     */
+//    public void setScorePerRaceList(ArrayList<int[]> scorePerRaceList) {
+//        this.scorePerRaceList = scorePerRaceList;
+//    }
+//
+//    /**
+//     * Returns the calculated ranking list
+//     * @return
+//     */
+//    public ArrayList<Integer> getFinalRankList() {
+//        return finalRankList;
+//    }
 
     /**
      * Set the calculated ranking list
@@ -151,14 +216,25 @@ public class ScoreKeeper {
         int[] r1_test = {3,5,6,9};
         int[] r2_test = {8,22,13,19};
         int[] r3_test = {39,23,103,54};
+        String[] carNames = {"BRITISH MOTOR COMPANY", "FAST AND FURIOUS", "SCOOBY GANG", "SPEEDY CADDY"};
+        String[] trackNames = {"Boston", "New York", "Philidelphia", "Washington D.C."};
+        int[] speeds = {60,102,48,80};
+        int[] lengths = {2000,3040,3948,1800};
 
-        sk.setRaceScores(r1_test);
-        sk.setRaceScores(r2_test);
-        sk.setRaceScores(r3_test);
+//        sk.setRaceScores(r1_test);
+//        sk.setRaceScores(r2_test);
+//        sk.setRaceScores(r3_test);
+        sk.setCarNames(carNames);
+        sk.setTrackName(trackNames);
+        sk.setCarSpeeds(speeds);
+        sk.setTrackLength(lengths);
+        sk.calculateRaceTime();
+        sk.setFinalRankList();
         System.out.print(sk.getSingleCarScores(3));
-        System.out.print(sk.getSingleRaceScores(1));
-
-        System.out.print(sk.getAllRaceScores());
+//        System.out.print(sk.getSingleRaceScores(1));
+        System.out.print(sk.getTotalScorePerCar(3));
+        System.out.print(sk.getFinalRankList());
+//        System.out.print(sk.getAllRaceScores());
 
 
 
