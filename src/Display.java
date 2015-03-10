@@ -24,17 +24,16 @@ public class Display extends JFrame{
     private JButton start, stop,car1,car2,car3,car4;
     private JTextArea text1,text2;
     private TitledBorder title1,title2;
-    private JLabel label,label2;
+    private JLabel label,label2,label3,label4;
     private BufferedImage image;
     private RaceDisplay rd;
-   
+    private Environment env;
+    private Car car;
 
     
     public Display() {
         
         super("CAR GAME");
-        rd = new RaceDisplay();
-        
    /* ---------------------------------
     *            BOARD PANELS
     -----------------------------------*/
@@ -56,7 +55,7 @@ public class Display extends JFrame{
         south.setBackground(Color.GRAY);
         
        /* ---------------------------------------
-        * Text area used to diaply the results.
+        * Text area used to diaplay the results.
         ------------------------------------------*/  
         text1 = new JTextArea();
         text2 = new JTextArea();
@@ -66,8 +65,10 @@ public class Display extends JFrame{
         ImageIcon img2 = new ImageIcon("./images/car2-small.gif");
         ImageIcon img3 = new ImageIcon("./images/car3-small.gif");
         ImageIcon img4 = new ImageIcon("./images/car4-small.gif");
-    
-
+        ImageIcon img5 = new ImageIcon("./images/flag 2.png");
+        ImageIcon img6 = new ImageIcon("./images/flag1.png");
+        
+     
      /* ----------------------------------------------------
       * creates the buttons and adds the proper image to them 
       --------------------------------------------------------*/   
@@ -77,6 +78,8 @@ public class Display extends JFrame{
         car4=new JButton("SPEEDY CADDY",img4);
         start=new JButton("START");
         stop  = new JButton("STOP");
+        
+        
   
     /* ----------------------------------------------------
      * creates the title border and adds them to panels 
@@ -106,15 +109,24 @@ public class Display extends JFrame{
        left.add(car2);
        left.add(car3);
        left.add(car4);
+   /* ----------------------------------------------------
+   * adds the images 
+   --------------------------------------------------------*/     
        
-    
+       label3=new JLabel(img6);
+       label4 = new JLabel(img5);
+        
+        left.add(label3);
+        center.add(label4);
+   
     /* ----------------------------------------------------
     * adds the panels to the main Frame at proper location
      --------------------------------------------------------*/
         add(right,BorderLayout.EAST);
         add(left,BorderLayout.WEST);
         add(south,BorderLayout.SOUTH);
-        add(BorderLayout.CENTER,new RaceDisplay());
+        add(center,BorderLayout.CENTER);
+       
        
   /* -------------------------------------------------
    *        Gives actions to the buttons
@@ -140,13 +152,14 @@ public class Display extends JFrame{
      * 
      */
     private class Start implements ActionListener{
-        ImageIcon imgTrack;
+     
         public void actionPerformed(ActionEvent event){
-            //imgTrack = new ImageIcon("./images/track1.jpg");
-            
-            
-            
-            
+
+            env = new Environment();
+            rd = new RaceDisplay();
+            add(rd);
+            revalidate();
+            repaint(); 
         }  
     }
      /**
@@ -168,9 +181,7 @@ public class Display extends JFrame{
               img = new ImageIcon("./images/car1-big.png");
               label= new JLabel(img);
               JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
-           }
-        
-           
+           }     
     }
       /**
      * 
@@ -219,10 +230,9 @@ public class Display extends JFrame{
     }
     
      public static void main(String[] args) {
+         
         Display d = new Display(); 
-        RaceDisplay rd = new RaceDisplay();
-      
-               
+        
    }
 
 
