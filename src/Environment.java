@@ -25,7 +25,7 @@ public class Environment {
         populateGarage();
         populateTracks();
 
-        sk = new ScoreKeeper();
+        sk = new ScoreKeeper(4,4);
 
         beginRace();
 

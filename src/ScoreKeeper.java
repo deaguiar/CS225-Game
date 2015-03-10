@@ -14,20 +14,25 @@ public class ScoreKeeper {
     //storing the scores
     private ArrayList<int[]> scorePerRaceList;
     private ArrayList<Integer> finalRankList;
-    private int[] carSpeeds = new int[4];
-    private String[] carNameList = new String[4];
-    private String[] trackNameList = new String[4];
-    private int[] trackLengthList = new int[4];
+    private int[] carSpeeds;
+    private String[] carNameList;
+    private String[] trackNameList;
+    private int[] trackLengthList;
 //    private Car[] cars;
 //    private Track[] tracks;
 
     /**
      * Constructor
      */
-    public ScoreKeeper() {
+    public ScoreKeeper(int numberOfCar, int numberOfTracks) {
         //initialize variables
         scorePerRaceList = new ArrayList<int[]>();
         finalRankList = new ArrayList<Integer>();
+        carSpeeds = new int[numberOfCar];
+        carNameList = new String[numberOfCar];
+        trackNameList = new String[numberOfTracks];
+        trackLengthList = new int[numberOfTracks];
+
 
     }
 
@@ -50,15 +55,17 @@ public class ScoreKeeper {
 
     /**
      * returns all the scores
-     * @return String: all time scores
+     * @return String
      */
     public String getAllRaceScores(){
         String s = "";
-
+        int i=0;
         for(int[] race: scorePerRaceList) {
-            for(int i=0; i<race.length;i++) {
-                s += carNameList[i] + " Time: " + Integer.toString(race[i]) + "\n";
+            s += trackNameList[i]+":\n";
+            for(int j=0; j<race.length;j++) {
+                s += carNameList[j] + " Time: " + Integer.toString(race[j]) + " seconds.\n";
             }
+            i++;
         }
 
         return s;
@@ -176,43 +183,9 @@ public class ScoreKeeper {
 
     }
 
-
-//    //Getter and Setter
-//
-//    /**
-//     * Return the list contains scores of every cars in all races
-//     * @return ArrayList
-//     */
-//    public ArrayList<int[]> getScorePerRaceList() {
-//        return scorePerRaceList;
-//    }
-//
-//    /**
-//     * Set the list of scores of every cars in all races
-//     * @param scorePerRaceList
-//     */
-//    public void setScorePerRaceList(ArrayList<int[]> scorePerRaceList) {
-//        this.scorePerRaceList = scorePerRaceList;
-//    }
-//
-//    /**
-//     * Returns the calculated ranking list
-//     * @return
-//     */
-//    public ArrayList<Integer> getFinalRankList() {
-//        return finalRankList;
-//    }
-
-    /**
-     * Set the calculated ranking list
-     * @param finalRankList
-     */
-    public void setFinalRankList(ArrayList<Integer> finalRankList) {
-        this.finalRankList = finalRankList;
-    }
-
+    //test
     public static void main(String[] args) {
-        ScoreKeeper sk = new ScoreKeeper();
+        ScoreKeeper sk = new ScoreKeeper(4,4);
         int[] r1_test = {3,5,6,9};
         int[] r2_test = {8,22,13,19};
         int[] r3_test = {39,23,103,54};
@@ -234,6 +207,7 @@ public class ScoreKeeper {
 //        System.out.print(sk.getSingleRaceScores(1));
         System.out.print(sk.getTotalScorePerCar(3));
         System.out.print(sk.getFinalRankList());
+        System.out.print("\n"+sk.getAllRaceScores());
 //        System.out.print(sk.getAllRaceScores());
 
 
