@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 
 /**
@@ -71,7 +72,7 @@ public class ScoreKeeper {
         }
 
         return s;
-    }
+    }//end of getAllRaceScores
 
     /**
      * calculates every car's time in every race
@@ -89,7 +90,7 @@ public class ScoreKeeper {
             }
             scorePerRaceList.add(tempTimeList);
         }
-    }
+    }//end of calculateRaceTime
 
     /**
      * returns all the scores of 1 car
@@ -108,7 +109,7 @@ public class ScoreKeeper {
         }
 
         return s;
-    }
+    }//end of getSingleCarScores
 
     /**
      * calculate total time of 1 car
@@ -126,7 +127,7 @@ public class ScoreKeeper {
 
         return totalTemp;
 
-    }
+    }//end of getTotalScorePerCar
 
     /**
      * set the final score list
@@ -139,7 +140,7 @@ public class ScoreKeeper {
             finalRankList.add(tempFinal);
         }
 
-    }
+    }//end of setFinalRankList
 
     /**
      * get the final scores
@@ -151,7 +152,7 @@ public class ScoreKeeper {
             temp += carNameList[i] + "'s total time: " + Integer.toString(finalRankList.get(i)) + " hours\n";
         }
         return temp;
-    }
+    }//end of getFinalRankList
 
     /**
      * returns all the scores of 1 race
@@ -173,7 +174,7 @@ public class ScoreKeeper {
         }
 
         return s;
-    }
+    }//end of getSingleRaceScores
 
     public String findWinner(){
         //create a temp int array to get the number of cars per race
@@ -189,22 +190,17 @@ public class ScoreKeeper {
 
         return "The Winner is " + carNameList[index] + " with total time of " + finalRankList.get(index);
 
-    }
+    }//end of findWinner
+
 
     //test
     public static void main(String[] args) {
         ScoreKeeper sk = new ScoreKeeper(4,4);
-        int[] r1_test = {3,5,6,9};
-        int[] r2_test = {8,22,13,19};
-        int[] r3_test = {39,23,103,54};
         String[] carNames = {"BRITISH MOTOR COMPANY", "FAST AND FURIOUS", "SCOOBY GANG", "SPEEDY CADDY"};
         String[] trackNames = {"Boston", "New York", "Philidelphia", "Washington D.C."};
         int[] speeds = {88,102,48,160};
         int[] lengths = {2000,3040,3948,1800};
 
-//        sk.setRaceScores(r1_test);
-//        sk.setRaceScores(r2_test);
-//        sk.setRaceScores(r3_test);
         sk.setCarNames(carNames);
         sk.setTrackName(trackNames);
         sk.setCarSpeeds(speeds);
@@ -218,7 +214,6 @@ public class ScoreKeeper {
 //        System.out.print("\n"+sk.getAllRaceScores());
 //        System.out.print(sk.getAllRaceScores());
         System.out.print(sk.findWinner());
-
-
-    }
+    }//end of test
+    
 }//End of ScoreKeeper.java
