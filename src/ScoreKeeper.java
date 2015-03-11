@@ -16,12 +16,10 @@ public class ScoreKeeper {
     //storing the scores
     private ArrayList<int[]> scorePerRaceList;
     private ArrayList<Integer> finalRankList;
-    private int[] carSpeeds;
+    private ArrayList<int[]> carSpeeds;
     private String[] carNameList;
     private String[] trackNameList;
     private int[] trackLengthList;
-//    private Car[] cars;
-//    private Track[] tracks;
 
     /**
      * Constructor
@@ -30,7 +28,7 @@ public class ScoreKeeper {
         //initialize variables
         scorePerRaceList = new ArrayList<int[]>();
         finalRankList = new ArrayList<Integer>();
-        carSpeeds = new int[numberOfCar];
+        carSpeeds = new ArrayList<int[]>();
         carNameList = new String[numberOfCar];
         trackNameList = new String[numberOfTracks];
         trackLengthList = new int[numberOfTracks];
@@ -38,7 +36,7 @@ public class ScoreKeeper {
 
     }
 
-    public void setCarSpeeds(int[] speed){ this.carSpeeds = speed; }
+    public void setCarSpeeds(ArrayList<int[]> speed){ this.carSpeeds = speed; }
 
     public void setTrackName(String[] name) { this.trackNameList = name; }
 
@@ -77,16 +75,23 @@ public class ScoreKeeper {
      * calculates every car's time in every race
      */
     public void calculateRaceTime(){
-
+        //sets a counter to know which list of speeds to look for
+        int t = 0;
+        //for every track
         for(int l: trackLengthList) {
+            //sets a counter for all cars per track
             int i = 0;
-            int[] tempTimeList = new int[carSpeeds.length];
 
-            for(int s: carSpeeds) {
+            //temporary array to keep the scores
+            int[] tempTimeList = new int[carNameList.length];
+
+            //for each car in a race
+            for(int s: carSpeeds.get(t)) {
                 int tempTime = l/s;
                 tempTimeList[i] = tempTime;
                 i++;
             }
+            t++;
             scorePerRaceList.add(tempTimeList);
         }
     }//end of calculateRaceTime
@@ -194,26 +199,35 @@ public class ScoreKeeper {
 
     //test
     public static void main(String[] args) {
-//        ScoreKeeper sk = new ScoreKeeper(4,4);
-//        String[] carNames = {"BRITISH MOTOR COMPANY", "FAST AND FURIOUS", "SCOOBY GANG", "SPEEDY CADDY"};
-//        String[] trackNames = {"Boston", "New York", "Philidelphia", "Washington D.C."};
-//        int[] speeds = {88,102,48,160};
-//        int[] lengths = {2000,3040,3948,1800};
-//
-//        sk.setCarNames(carNames);
-//        sk.setTrackName(trackNames);
-//        sk.setCarSpeeds(speeds);
-//        sk.setTrackLength(lengths);
-//        sk.calculateRaceTime();
+        ScoreKeeper sk = new ScoreKeeper(4,4);
+        String[] carNames = {"BRITISH MOTOR COMPANY", "FAST AND FURIOUS", "SCOOBY GANG", "SPEEDY CADDY"};
+        String[] trackNames = {"Boston", "New York", "Philidelphia", "Washington D.C."};
+        int[] speeds = {88,102,48,160};
+        int[] sppeds2 = {39,34,102,100};
+        int[] speeds3 = {130,225,80,36};
+        int[] speeds4 = {64,112,49,88};
+        ArrayList<int[]> speedsList = new ArrayList<int[]>();
+        int[] lengths = {2000,3040,3948,1800};
+
+        speedsList.add(speeds);
+        speedsList.add(sppeds2);
+        speedsList.add(speeds3);
+        speedsList.add(speeds4);
+
+        sk.setCarNames(carNames);
+        sk.setTrackName(trackNames);
+        sk.setCarSpeeds(speedsList);
+        sk.setTrackLength(lengths);
+        sk.calculateRaceTime();
 //        sk.setFinalRankList();
-//        System.out.print(sk.getSingleCarScores(3));
+        System.out.print(sk.getSingleCarScores(3));
 //        System.out.print(sk.getSingleRaceScores(1));
 //        System.out.print(sk.getTotalScorePerCar(3));
 //        System.out.print(sk.getFinalRankList());
 //        System.out.print("\n"+sk.getAllRaceScores());
 //        System.out.print(sk.getAllRaceScores());
 //        System.out.print(sk.findWinner());
-        Display d = new Display();
+//        Display d = new Display();
     }//end of test
 
 }//End of ScoreKeeper.java

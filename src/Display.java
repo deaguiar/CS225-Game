@@ -229,7 +229,7 @@ public class Display extends JFrame{
 
             img = new ImageIcon("./images/car3-big.png");
             label= new JLabel(img);
-            int car = JOptionPane.showConfirmDialog(null, label,"YOUR CAR", JOptionPane.INFORMATION_MESSAGE,JOptionPane.YES_NO_OPTION);
+            int car = JOptionPane.showConfirmDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,JOptionPane.YES_NO_OPTION);
             if(car == JOptionPane.YES_OPTION) {
                 userSelect = true;
                 userCar = env.getCarName(2);
@@ -248,7 +248,7 @@ public class Display extends JFrame{
 
             img = new ImageIcon("./images/car4-big.png");
             label= new JLabel(img);
-            int car = JOptionPane.showConfirmDialog(null, label,"YOUR CAR", JOptionPane.INFORMATION_MESSAGE,JOptionPane.YES_NO_OPTION);
+            int car = JOptionPane.showConfirmDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,JOptionPane.YES_NO_OPTION);
             if(car == JOptionPane.YES_OPTION) {
                 userSelect = true;
                 userCar = env.getCarName(3);
@@ -263,10 +263,10 @@ public class Display extends JFrame{
     */
     private class RaceDisplay extends JPanel implements ActionListener{
 
-        private   Image img1,img2,img3,img4,img5;
+        private   Image img1,img2,img3,img4,img5,img6;
         private JLabel l1;
-        private int velX;
-        private int x;
+        private int velX1,velX2,velX3,velX4;
+        private int x1,x2,x3,x4;
         private Timer tm;
         private Car car;
         private ScoreKeeper sk;
@@ -278,11 +278,15 @@ public class Display extends JFrame{
         public RaceDisplay(){
 
             tm = new Timer(30,this);
-            x=0;
-            velX=4;
-            resultString.add("Works");
-            resultString.add("Works1");
-            resultString.add("Works2");
+            x1=0;
+            x2=0;
+            x3=0;
+            x4=0;
+
+            velX1=env.getSpeedOfCar(0,0);
+            velX2=env.getSpeedOfCar(0,1);
+            velX3=env.getSpeedOfCar(0,2);
+            velX4=env.getSpeedOfCar(0,3);
 
         }
 
@@ -294,46 +298,72 @@ public class Display extends JFrame{
             ImageIcon car3 = new ImageIcon("./images/car3-small.gif");
             ImageIcon car4 = new ImageIcon("./images/car4-small.gif");
             ImageIcon imgLine = new ImageIcon("./images/finish_line.png");
-
+            ImageIcon imgBg = new ImageIcon("./images/starting_line.png");
 
             img1 = car1.getImage();
             img2 = car2.getImage();
             img3= car3.getImage();
             img4= car4.getImage();
             img5 = imgLine.getImage();
+            img6= imgBg.getImage();
 
 
-            g.drawImage(img1,x,100,null);
-            g.drawImage(img2,x,200,null);
-            g.drawImage(img3,x,300,null);
-            g.drawImage(img4,x,400,null);
+
+            g.drawImage(img6, 0, 0, null);
+            g.drawImage(img1,x1,100,null);
+            g.drawImage(img2,x2,200,null);
+            g.drawImage(img3,x3,300,null);
+            g.drawImage(img4,x4,400,null);
             g.drawImage(img5,750,50,null);
+
+
             tm.start();
 
         }
         //makes the imgaes move. They also stop for 3 sec when they rech 650
         public void actionPerformed(ActionEvent e) {
 
-            x=x+velX;
-            if(x>=650){
-                x=0;
-                x=x+velX; //<---------change this variable to accomodate the car's speeds.
+            x1=x1+velX1;
+            x2=x2+velX2;
+            x3=x3+velX3;
+            x4=x4+velX4;
+            repaint();
 
-                for(int i=0;i<=resultString.size()-1;i++){
-                    text1.setText(resultString.get(i));
 
-                    System.out.println(resultString.get(i));
-                }
+            if(x1>=650){
+                velX1=0;
+            }
+            if(x2>=650){
+                velX2=0;
+            }
+            if(x3>=650){
+                velX3=0;
+            }
+            if(x4>=650){
+                velX4=0;
+            }
+            if (x1>=650 && x2>=650 && x3>=650 && x4>=650){//<---works
+
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(2500);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Display.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                text1.append(sk.getSingleRaceScores(0));
+
+                x1=0;
+                x2=0;
+                x3=0;
+                x4=0;
                 repaint();
 
+                velX1=env.getSpeedOfCar(0,0);
+                velX2=env.getSpeedOfCar(0,1);
+                velX3=env.getSpeedOfCar(0,2);
+                velX4=env.getSpeedOfCar(0,3);
             }
-
             repaint();
+
         }
     }
 }
