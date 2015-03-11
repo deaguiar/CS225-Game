@@ -6,19 +6,27 @@ import java.util.ArrayList;
  *
  * @modified by Sean Johnston
  * @3/7/2015
+ * 
  */
+ 
 public class Environment {
 
-    private Car[] garage;
+    private ArrayList<Car> garage;
     private Track[] tracks;
     private String[] carNames = {"BRITISH MOTOR COMPANY", "FAST AND FURIOUS", "SCOOBY GANG", "SPEEDY CADDY"};
     private String[] trackNames = {"Boston", "New York", "Philidelphia", "Washington D.C."};
     private Random random;
     private ScoreKeeper sk;
+    
+    //Car and track data
+    int[] carSpeeds;
+    int[] trackLengths;
+    
+    Display display;
 
-    /**
-     * Constructor
-     */
+    
+      
+    
     public Environment(){
         random = new Random();
 
@@ -26,33 +34,46 @@ public class Environment {
         populateTracks();
 
         sk = new ScoreKeeper(4,4);
+        
+        
+        sk.setCarNames(carNames);
+        sk.setTrackName(trackNames);
+        sk.setCarSpeeds(carSpeeds);
+        
+        //display = new Display();
+        //display.setSpeeds(carSpeeds);
+        
+        //display.beginRace();
 
-        beginRace();
-
-//        calculateWinner();
+        
 
     }
 
 
-    /**
-     * Create the cars to be put into Tracks
-     */
+    
+     /**
+      * Create the cars to be put into Tracks
+      */
+   
     public void populateGarage()
     {
-        garage = new Car[4];
+        carSpeeds = new int[carNames.length];
+        garage = new ArrayList<>();
         int randomSpeed;
         Car car;
 
-        for(int i= 0; i < garage.length; i++)
+        for(int i= 0; i < garage.size(); i++)
         {
             //Get a random number between 5 and 10 to use as the random speed of a car
             randomSpeed = random.nextInt(10);
             if(randomSpeed < 5){
                 randomSpeed = randomSpeed +5;
             }
+            
 
             car = new Car(carNames[i], randomSpeed);
-            garage[i] = car;
+            garage.add(car);
+            carSpeeds[i] = randomSpeed;
 
             System.out.println(car.getName() +" has speed "+ car.getSpeed());
 
@@ -62,12 +83,16 @@ public class Environment {
         System.out.println("\n");
     }
 
+    
+      
     /**
-     * Create the Tracks for race
-     */
+       * Create the Tracks for race
+       */
+    
     public void populateTracks()
     {
         tracks = new Track[4];
+        trackLengths = new int[tracks.length];
         int randomLength;
         Track track;
 
@@ -81,7 +106,7 @@ public class Environment {
             }
 
             track = new Track(trackNames[i], randomLength);
-
+            trackLengths[i] = randomLength;
             tracks[i] = track;
 
             System.out.println( track.getName() +" has length "+ track.getLength() );
@@ -90,72 +115,12 @@ public class Environment {
         System.out.println("\n");
     }
 
-    /**
-     * Place cars into Track
-     * calculates the time for each car to finish the races.
-     */
-    public void beginRace()
-    {
-        int [] raceTimes;
-        int newTime;
-        Car car;
+    
+    
 
-        for(Track track: tracks)
-        {
-            raceTimes= new int[garage.length];
-            for(int i= 0; i < garage.length; i++)
-            {
-                car = garage[i];
 
-                newTime = track.getLength() / car.getSpeed();
-
-                raceTimes[i] = newTime;
-
-                //needs to put the time into scorekeeper
-
-                System.out.println(car.getName() + " raced " +track.getName()+ " in " +newTime+ " hours.");
-            }
-
-            System.out.println("\n");
-            sk.setRaceScores(raceTimes);
-        }
+    
+    public ArrayList getCar(){
+        return garage;
     }
-
-
-    /**
-     * Take all the times each car use to finish all races
-     * then calculates the total time,
-     * sort the time from lowest to highest for displaying the winners.
-     */
-//    public void calculateWinner()
-//    {
-//        //taking the list of time scores from scorekeeper
-//        ArrayList<int[]> scoreList = sk.getScorePerRaceList();
-//        //temporary array to store the total times
-//        int[] timeTotals = new int[garage.length];
-//        int time;
-//
-//        for(int[] timeArray: scoreList)
-//        {
-//            for(int i = 0; i < timeTotals.length; i++)
-//            {
-//                time = timeTotals[i] + timeArray[i];
-//
-//                timeTotals[i] = time;
-//            }
-//        }
-//
-//
-//        //Print final results
-//        //isn't this going to be store in scorekeeper?
-//        Car car;
-//        for(int i= 0; i < timeTotals.length; i++)
-//        {
-//            car = garage[i];
-//            time = timeTotals[i];
-//
-//            System.out.println( car.getName() +"'s total time was " +time);
-//        }
-//    }
-
 }//End of Environment.java
