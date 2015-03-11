@@ -21,11 +21,11 @@ public class Environment {
      */
     public Environment(){
         random = new Random();
+        sk = new ScoreKeeper(4,4);
+
 
         populateGarage();
         populateTracks();
-
-        sk = new ScoreKeeper(4,4);
 
         beginRace();
 
