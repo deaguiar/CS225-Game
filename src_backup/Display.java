@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+//import java.awt.image.BufferedImage;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,14 +26,17 @@ import javax.swing.border.TitledBorder;
 public class Display extends JFrame{
 
 
-    private JPanel right,left,center,south,panel;
-    private JButton start,car1,car2,car3,car4;
-    private JTextArea text1,text2,text3,text4;
+    private JPanel right,left,center,south;
+    private JButton start, stop,car1,car2,car3,car4;
+    private JTextArea text1,text2;
     private TitledBorder title1,title2;
     private JLabel label,label2,label3,label4;
+//    private BufferedImage image;
     private RaceDisplay rd;
+//    private Environment env;
     private Car car;
     private ScoreKeeper sk = new ScoreKeeper(4,4);
+
 
     public Display() {
 
@@ -45,7 +49,7 @@ public class Display extends JFrame{
         right.setLayout(new BoxLayout(right, BoxLayout.PAGE_AXIS));
         right.setBackground(Color.GRAY);
 
-        //center panel uses default layout
+         //center panel uses default layout
         center = new JPanel();
 
 
@@ -63,7 +67,7 @@ public class Display extends JFrame{
         text1 = new JTextArea("",20,20);
         text2 = new JTextArea();
 
-        // ------------>car images to be used in the Car class<------------------
+    // ------------>car images to be used in the Car class<------------------
         ImageIcon img = new ImageIcon("./images/Car1-small.gif");
         ImageIcon img2 = new ImageIcon("./images/car2-small.gif");
         ImageIcon img3 = new ImageIcon("./images/car3-small.gif");
@@ -80,17 +84,18 @@ public class Display extends JFrame{
         car3=new JButton("SCOOBY GANG",img3);
         car4=new JButton("SPEEDY CADDY",img4);
         start=new JButton("START");
+//        stop  = new JButton("STOP");
 
 
 
     /* ----------------------------------------------------
      * creates the title border and adds them to panels
       --------------------------------------------------------*/
-        title1 = new TitledBorder("RESULTS");
-        title2 = new TitledBorder("CHOOSE YOUR RACER!");
-        //adds the title borders to the Panels.
-        right.setBorder(title1);
-        left.setBorder(title2);
+       title1 = new TitledBorder("RESULTS");
+       title2 = new TitledBorder("CHOOSE YOUR RACER!");
+       //adds the title borders to the Panels.
+       right.setBorder(title1);
+       left.setBorder(title2);
 
 
    /* ----------------------------------------------------
@@ -98,27 +103,28 @@ public class Display extends JFrame{
     * the result will be displayed
     --------------------------------------------------------*/
 
-        text1 = new JTextArea("",10,30);
-        text2 = new JTextArea("",10,30);
-        //text1.setText("");
-        right.add(text1);
-        right.add(text2);
-        text1.setLineWrap(true);
+       text1 = new JTextArea(" ",10,30);
+       text2 = new JTextArea("",10,30);
+       right.add(text1);
+       right.add(text2);
+       text1.setLineWrap(true);
+        text2.setLineWrap(true);
 
   /* ----------------------------------------------------
    * adds the buttons to the proper panels
    --------------------------------------------------------*/
-        south.add(start);
-        left.add(car1);
-        left.add(car2);
-        left.add(car3);
-        left.add(car4);
+       south.add(start);
+//       south.add(stop);
+       left.add(car1);
+       left.add(car2);
+       left.add(car3);
+       left.add(car4);
    /* ----------------------------------------------------
-   * adds the images of flags
+   * adds the images
    --------------------------------------------------------*/
 
-        label3=new JLabel(img6);
-        label4 = new JLabel(img5);
+       label3=new JLabel(img6);
+       label4 = new JLabel(img5);
 
         left.add(label3);
         center.add(label4);
@@ -152,38 +158,43 @@ public class Display extends JFrame{
     }//end of constructor
 
 
-    /**
+     /**
      *
      */
     private class Start implements ActionListener{
 
-
-
         public void actionPerformed(ActionEvent event){
 
-            Countdown c= new Countdown();
+//            env = new Environment();
+            Countdown c = new Countdown();
             rd = new RaceDisplay();
             add(rd);
             revalidate();
             repaint();
-
         }
     }
-    /**
+//     /**
+//     *
+//     */
+//    private class Stop implements ActionListener{
+//        public void actionPerformed(ActionEvent event){
+//           //method that starts race
+//        }
+//    }
+     /**
      *
      */
-
     private class Car1Button implements ActionListener{
         private ImageIcon img;
 
         public void actionPerformed(ActionEvent event){
 
-            img = new ImageIcon("./images/car1-big.png");
-            label= new JLabel(img);
-            JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
-        }
+              img = new ImageIcon("./images/car1-big.png");
+              label= new JLabel(img);
+              JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
+           }
     }
-    /**
+      /**
      *
      */
     private class Car2Button implements ActionListener{
@@ -191,15 +202,14 @@ public class Display extends JFrame{
 
         public void actionPerformed(ActionEvent event){
 
-            img = new ImageIcon("./images/car2-big.png");
-            label= new JLabel(img);
-            JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
-
-        }
+              img = new ImageIcon("./images/car2-big.png");
+              label= new JLabel(img);
+              JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
+           }
 
 
     }
-    /**
+       /**
      *
      */
     private class Car3Button implements ActionListener{
@@ -207,14 +217,14 @@ public class Display extends JFrame{
 
         public void actionPerformed(ActionEvent event){
 
-            img = new ImageIcon("./images/car3-big.png");
-            label= new JLabel(img);
-            JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
-        }
+              img = new ImageIcon("./images/car3-big.png");
+              label= new JLabel(img);
+              JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
+           }
 
 
     }
-    /**
+       /**
      *
      */
     private class Car4Button implements ActionListener{
@@ -222,16 +232,22 @@ public class Display extends JFrame{
 
         public void actionPerformed(ActionEvent event){
 
-            img = new ImageIcon("./images/car4-big.png");
-            label= new JLabel(img);
-            JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
-        }
+              img = new ImageIcon("./images/car4-big.png");
+              label= new JLabel(img);
+              JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
+           }
+
+
     }
+//
+//     public static void main(String[] args) {
+//
+//        Display d = new Display();
+//
+//   }
 
-
-
-    /*
-     * Creates the panel where the race cars are displayed
+    /**
+    * Creates the panel where the race cars are displayed
     */
     private class RaceDisplay extends JPanel implements ActionListener{
 
@@ -283,13 +299,13 @@ public class Display extends JFrame{
             tm.start();
 
         }
-        //makes the imgaes move. They also stop for 3 sec when they rech 650
+        //makes the images move. They also stop for 3 sec when they reach 650
         public void actionPerformed(ActionEvent e) {
 
             x=x+velX;
             if(x>=650){
                 x=0;
-                x=x+velX; //<---------change this variable to accomodate the car's speeds.
+                x=x+velX; //<---------change this variable to accommodate the car's speeds.
 
                 for(int i=0;i<=resultString.size()-1;i++){
                     text1.setText(resultString.get(i));
@@ -308,6 +324,9 @@ public class Display extends JFrame{
             repaint();
         }
     }
-}
 
-//}//End of Display.java
+
+
+    //TO DO: add method for count down
+
+}//End of Display.java
