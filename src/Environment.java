@@ -42,6 +42,7 @@ public class Environment {
         sk.setCarNames(carNames);
         sk.setTrackName(trackNames);
         sk.setCarSpeeds(carSpeeds);
+        sk.setTrackName(trackNames);
         
         //display = new Display();
         //display.setSpeeds(carSpeeds);
@@ -117,7 +118,9 @@ public class Environment {
         System.out.println("\n");
     }
 
-    
+    public String getCarName(int i){
+        return carNames[i];
+    }
     
 
 

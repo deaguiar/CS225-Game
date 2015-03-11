@@ -10,13 +10,12 @@ public class Countdown extends JFrame{
     private final static int NUMBER_OF_SLIDES = 4;
      private final static int SHOW_TIME_PER_SLIDE = 1500;
      private static final int TIME_VISIBLE = 7500;
-     private int current = 0;
+     private int current = 3;
      private JLabel imageLabel = new JLabel();
 
      public Countdown() {
-         imageLabel.setIcon(new ImageIcon("./images/number1.png"));
-         Timer timer  = new Timer(SHOW_TIME_PER_SLIDE,new Listener());
-         timer.start();
+         imageLabel.setIcon(new ImageIcon("./images/number_3.png"));
+         new Timer(SHOW_TIME_PER_SLIDE,new Listener()).start();
          add(imageLabel);
           
         setTitle("GET READY!");
@@ -39,9 +38,11 @@ public class Countdown extends JFrame{
          public class Listener implements ActionListener{
              public void actionPerformed(ActionEvent event)
              {
-                 current  = (current +1);
-                 imageLabel.setIcon(new ImageIcon("./images/number_"+current+".png"));
-                
+                 if(current >=0) {
+                     current--;
+                     imageLabel.setIcon(new ImageIcon("./images/number_" + current + ".png"));
+
+                 }
                  
              }         
          }

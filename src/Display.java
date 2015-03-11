@@ -1,4 +1,6 @@
 
+import com.sun.codemodel.internal.JOp;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -30,9 +32,14 @@ public class Display extends JFrame{
     private JTextArea text1,text2,text3,text4;
     private TitledBorder title1,title2;
     private JLabel label,label2,label3,label4;
+    private Environment env = new Environment();
     private RaceDisplay rd;
     private Car car;
     private ScoreKeeper sk = new ScoreKeeper(4,4);
+
+    //check if user selected a car.
+    private boolean userSelect = false;
+    private String userCar;
 
     public Display() {
 
@@ -157,16 +164,20 @@ public class Display extends JFrame{
      */
     private class Start implements ActionListener{
 
+        public void actionPerformed(ActionEvent event) {
 
-
-        public void actionPerformed(ActionEvent event){
-
-            Countdown c= new Countdown();
-            rd = new RaceDisplay();
-            add(rd);
-            revalidate();
-            repaint();
-
+            if (userSelect) {
+//                System.out.print(userCar);
+                Countdown c = new Countdown();
+                rd = new RaceDisplay();
+                add(rd);
+                revalidate();
+                repaint();
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "You need to choose a car to start the game.", "Error", JOptionPane.WARNING_MESSAGE);
+//                System.out.print(userCar);
+            }
         }
     }
     /**
@@ -180,7 +191,12 @@ public class Display extends JFrame{
 
             img = new ImageIcon("./images/car1-big.png");
             label= new JLabel(img);
-            JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
+            int car = JOptionPane.showConfirmDialog(null, label,"YOUR CAR", JOptionPane.INFORMATION_MESSAGE,JOptionPane.YES_NO_OPTION);
+            if(car == JOptionPane.YES_OPTION) {
+                userSelect = true;
+                userCar = env.getCarName(0);
+//                System.out.print(userCar);
+            }
         }
     }
     /**
@@ -193,7 +209,11 @@ public class Display extends JFrame{
 
             img = new ImageIcon("./images/car2-big.png");
             label= new JLabel(img);
-            JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
+            int car = JOptionPane.showConfirmDialog(null, label,"YOUR CAR", JOptionPane.INFORMATION_MESSAGE,JOptionPane.YES_NO_OPTION);
+            if(car == JOptionPane.YES_OPTION) {
+                userSelect = true;
+                userCar = env.getCarName(1);
+            }
 
         }
 
@@ -209,7 +229,11 @@ public class Display extends JFrame{
 
             img = new ImageIcon("./images/car3-big.png");
             label= new JLabel(img);
-            JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
+            int car = JOptionPane.showConfirmDialog(null, label,"YOUR CAR", JOptionPane.INFORMATION_MESSAGE,JOptionPane.YES_NO_OPTION);
+            if(car == JOptionPane.YES_OPTION) {
+                userSelect = true;
+                userCar = env.getCarName(2);
+            }
         }
 
 
@@ -224,7 +248,11 @@ public class Display extends JFrame{
 
             img = new ImageIcon("./images/car4-big.png");
             label= new JLabel(img);
-            JOptionPane.showMessageDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,null);
+            int car = JOptionPane.showConfirmDialog(null, label,"YOUR CAR", JOptionPane.INFORMATION_MESSAGE,JOptionPane.YES_NO_OPTION);
+            if(car == JOptionPane.YES_OPTION) {
+                userSelect = true;
+                userCar = env.getCarName(3);
+            }
         }
     }
 
