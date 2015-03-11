@@ -213,6 +213,7 @@ public class ScoreKeeper {
 //        System.out.print("\n"+sk.getAllRaceScores());
 //        System.out.print(sk.getAllRaceScores());
         System.out.print(sk.findWinner());
+        Display d = new Display();
     }//end of test
 
 }//End of ScoreKeeper.java
