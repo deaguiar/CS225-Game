@@ -1,9 +1,14 @@
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+//import java.awt.image.BufferedImage;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -12,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.Timer;
 import javax.swing.border.TitledBorder;
 
 
@@ -25,10 +31,11 @@ public class Display extends JFrame{
     private JTextArea text1,text2;
     private TitledBorder title1,title2;
     private JLabel label,label2,label3,label4;
-    private BufferedImage image;
+//    private BufferedImage image;
     private RaceDisplay rd;
-    private Environment env;
+//    private Environment env;
     private Car car;
+    private ScoreKeeper sk = new ScoreKeeper(4,4);
 
     
     public Display() {
@@ -57,7 +64,7 @@ public class Display extends JFrame{
        /* ---------------------------------------
         * Text area used to diaplay the results.
         ------------------------------------------*/  
-        text1 = new JTextArea();
+        text1 = new JTextArea("",20,20);
         text2 = new JTextArea();
         
     // ------------>car images to be used in the Car class<------------------
@@ -77,7 +84,7 @@ public class Display extends JFrame{
         car3=new JButton("SCOOBY GANG",img3);
         car4=new JButton("SPEEDY CADDY",img4);
         start=new JButton("START");
-        stop  = new JButton("STOP");
+//        stop  = new JButton("STOP");
         
         
   
@@ -96,15 +103,18 @@ public class Display extends JFrame{
     * the result will be displayed
     --------------------------------------------------------*/    
        
-       text1 = new JTextArea(" ",100,30);
-       right.add(text1); 
+       text1 = new JTextArea(" ",10,30);
+       text2 = new JTextArea("",10,30);
+       right.add(text1);
+       right.add(text2);
        text1.setLineWrap(true);
+        text2.setLineWrap(true);
   
   /* ----------------------------------------------------
    * adds the buttons to the proper panels 
    --------------------------------------------------------*/
        south.add(start);
-       south.add(stop);
+//       south.add(stop);
        left.add(car1);
        left.add(car2);
        left.add(car3);
@@ -155,21 +165,22 @@ public class Display extends JFrame{
      
         public void actionPerformed(ActionEvent event){
 
-            env = new Environment();
+//            env = new Environment();
+            Countdown c = new Countdown();
             rd = new RaceDisplay();
             add(rd);
             revalidate();
             repaint(); 
         }  
     }
-     /**
-     * 
-     */
-    private class Stop implements ActionListener{
-        public void actionPerformed(ActionEvent event){
-           //method that starts race
-        }  
-    }
+//     /**
+//     *
+//     */
+//    private class Stop implements ActionListener{
+//        public void actionPerformed(ActionEvent event){
+//           //method that starts race
+//        }
+//    }
      /**
      * 
      */
@@ -228,12 +239,91 @@ public class Display extends JFrame{
         
            
     }
-    
-     public static void main(String[] args) {
-         
-        Display d = new Display(); 
-        
-   }
+//
+//     public static void main(String[] args) {
+//
+//        Display d = new Display();
+//
+//   }
+
+    /**
+    * Creates the panel where the race cars are displayed
+    */
+    private class RaceDisplay extends JPanel implements ActionListener{
+
+        private   Image img1,img2,img3,img4,img5;
+        private JLabel l1;
+        private int velX;
+        private int x;
+        private Timer tm;
+        private Car car;
+        private ScoreKeeper sk;
+        private Display d;
+        ArrayList<String>resultString = new ArrayList<String>();
+
+
+
+        public RaceDisplay(){
+
+            tm = new Timer(30,this);
+            x=0;
+            velX=4;
+            resultString.add("Works");
+            resultString.add("Works1");
+            resultString.add("Works2");
+
+        }
+
+        public void paintComponent(Graphics g){
+
+            super.paintComponent(g);
+            ImageIcon car1 = new ImageIcon("./images/Car1-small.gif");
+            ImageIcon car2 = new ImageIcon("./images/car2-small.gif");
+            ImageIcon car3 = new ImageIcon("./images/car3-small.gif");
+            ImageIcon car4 = new ImageIcon("./images/car4-small.gif");
+            ImageIcon imgLine = new ImageIcon("./images/finish_line.png");
+
+
+            img1 = car1.getImage();
+            img2 = car2.getImage();
+            img3= car3.getImage();
+            img4= car4.getImage();
+            img5 = imgLine.getImage();
+
+
+            g.drawImage(img1,x,100,null);
+            g.drawImage(img2,x,200,null);
+            g.drawImage(img3,x,300,null);
+            g.drawImage(img4,x,400,null);
+            g.drawImage(img5,750,50,null);
+            tm.start();
+
+        }
+        //makes the images move. They also stop for 3 sec when they reach 650
+        public void actionPerformed(ActionEvent e) {
+
+            x=x+velX;
+            if(x>=650){
+                x=0;
+                x=x+velX; //<---------change this variable to accommodate the car's speeds.
+
+                for(int i=0;i<=resultString.size()-1;i++){
+                    text1.setText(resultString.get(i));
+
+                    System.out.println(resultString.get(i));
+                }
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Display.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                repaint();
+
+            }
+
+            repaint();
+        }
+    }
 
 
 
