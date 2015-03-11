@@ -11,15 +11,15 @@ import java.util.ArrayList;
  
 public class Environment {
 
-    private ArrayList<Car> garage;
+    private Car[] garage;
     private Track[] tracks;
     private String[] carNames = {"BRITISH MOTOR COMPANY", "FAST AND FURIOUS", "SCOOBY GANG", "SPEEDY CADDY"};
-    private String[] trackNames = {"Boston", "New York", "Philidelphia", "Washington D.C."};
+    private String[] trackNames = {"Boston", "New York", "Philadelphia", "Washington D.C."};
     private Random random;
     private ScoreKeeper sk;
     
     //Car and track data
-    int[] carSpeeds;
+    ArrayList<int[]> carSpeeds;
     int[] trackLengths;
     
     Display display;
@@ -29,8 +29,6 @@ public class Environment {
     
     public Environment(){
         random = new Random();
-        sk = new ScoreKeeper(4,4);
-
 
         populateGarage();
         populateTracks();
@@ -38,12 +36,13 @@ public class Environment {
 
         sk = new ScoreKeeper(4,4);
         
-        
+//
         sk.setCarNames(carNames);
         sk.setTrackName(trackNames);
         sk.setCarSpeeds(carSpeeds);
         sk.setTrackName(trackNames);
-        
+
+        sk.calculateRaceTime();
         //display = new Display();
         //display.setSpeeds(carSpeeds);
         
@@ -60,28 +59,34 @@ public class Environment {
    
     public void populateGarage()
     {
-        carSpeeds = new int[carNames.length];
-        garage = new ArrayList<Car>();
+
+        garage = new Car[4];
+        carSpeeds = new ArrayList<int[]>();
+
         int randomSpeed;
         Car car;
 
-        for(int i= 0; i < garage.size(); i++)
-        {
-            //Get a random number between 5 and 10 to use as the random speed of a car
-            randomSpeed = random.nextInt(10);
-            if(randomSpeed < 5){
-                randomSpeed = randomSpeed +5;
+        for(int h=0; h < trackNames.length;h++) {
+            int[] tempSpeed = new int[carNames.length];
+            for (int i = 0; i < garage.length; i++) {
+                //Get a random number between 5 and 10 to use as the random speed of a car
+                randomSpeed = random.nextInt(10);
+                if (randomSpeed < 5) {
+                    randomSpeed = randomSpeed + 5;
+                }
+
+                car = new Car(carNames[i], randomSpeed);
+                garage[i] = car;
+                tempSpeed[i] = randomSpeed;
+
+
+                System.out.println(car.getName() + " has speed " + car.getSpeed());
+
+
             }
-            
-
-            car = new Car(carNames[i], randomSpeed);
-            garage.add(car);
-            carSpeeds[i] = randomSpeed;
-
-            System.out.println(car.getName() +" has speed "+ car.getSpeed());
-
-
+            carSpeeds.add(tempSpeed);
         }
+
 
         System.out.println("\n");
     }
@@ -112,7 +117,7 @@ public class Environment {
             trackLengths[i] = randomLength;
             tracks[i] = track;
 
-            System.out.println( track.getName() +" has length "+ track.getLength() );
+//            System.out.println( track.getName() +" has length "+ track.getLength() );
         }
 
         System.out.println("\n");
@@ -121,11 +126,40 @@ public class Environment {
     public String getCarName(int i){
         return carNames[i];
     }
-    
+
+    public int getSpeedOfCar(int race,int car){
+        int[] tempList;
+        tempList = carSpeeds.get(race);
+        int tempSpeed = tempList[car];
+        return tempSpeed;
+    }
+
+    private String speedsPrintOut() {
+        String s = "";
+        int i = 0;
+        for(int[] l: carSpeeds) {
+
+            s += "Race "+ Integer.toString(i) + ":\n";
+            for(int sp: l){
+                s += "Car Speed: " + Integer.toString(sp) + "  ";
+            }
+            i++;
+            s += "\n";
+        }
+
+        return s;
+    }
 
 
-    
-    public ArrayList getCar(){
+    public Car[] getCar(){
         return garage;
     }
+
+//    //test
+//    public static void main(String[] args) {
+//        Environment env = new Environment();
+//
+//        System.out.print(env.getCarName(3));
+//        System.out.print(env.speedsPrintOut());
+//    }
 }//End of Environment.java
