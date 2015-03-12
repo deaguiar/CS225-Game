@@ -36,9 +36,16 @@ public class Display extends JFrame{
     private boolean userSelect = false;
     private String userCar;
 
-    public Display() {
 
-        super("CAR GAME");
+
+        public Display() {
+            super("CAR GAME");
+            env = new Environment();
+            sk =  env.getSK();
+            BeginRace();
+
+        }
+    public void BeginRace(){
    /* ---------------------------------
     *            BOARD PANELS
     -----------------------------------*/
@@ -151,7 +158,7 @@ public class Display extends JFrame{
         setSize(1900,700);
         setVisible(true);
 
-    }//end of constructor
+    }//end of BeginRace
 
 
     /**
@@ -186,7 +193,7 @@ public class Display extends JFrame{
 
             img = new ImageIcon("./images/car1-big.png");
             label= new JLabel(img);
-            int car = JOptionPane.showConfirmDialog(null, label,"YOUR CAR", JOptionPane.INFORMATION_MESSAGE,JOptionPane.YES_NO_OPTION);
+            int car = JOptionPane.showConfirmDialog(null, label,"YOUR CAR", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE);
             if(car == JOptionPane.YES_OPTION) {
                 userSelect = true;
                 userCar = env.getCarName(0);
@@ -204,7 +211,7 @@ public class Display extends JFrame{
 
             img = new ImageIcon("./images/car2-big.png");
             label= new JLabel(img);
-            int car = JOptionPane.showConfirmDialog(null, label,"YOUR CAR", JOptionPane.INFORMATION_MESSAGE,JOptionPane.YES_NO_OPTION);
+            int car = JOptionPane.showConfirmDialog(null, label,"YOUR CAR", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE);
             if(car == JOptionPane.YES_OPTION) {
                 userSelect = true;
                 userCar = env.getCarName(1);
@@ -224,7 +231,7 @@ public class Display extends JFrame{
 
             img = new ImageIcon("./images/car3-big.png");
             label= new JLabel(img);
-            int car = JOptionPane.showConfirmDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,JOptionPane.YES_NO_OPTION);
+            int car = JOptionPane.showConfirmDialog(null, label,"YOUR CAR", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE);
             if(car == JOptionPane.YES_OPTION) {
                 userSelect = true;
                 userCar = env.getCarName(2);
@@ -243,7 +250,7 @@ public class Display extends JFrame{
 
             img = new ImageIcon("./images/car4-big.png");
             label= new JLabel(img);
-            int car = JOptionPane.showConfirmDialog(null, label,"YOUR CAR", JOptionPane.PLAIN_MESSAGE,JOptionPane.YES_NO_OPTION);
+            int car = JOptionPane.showConfirmDialog(null, label,"YOUR CAR", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE);
             if(car == JOptionPane.YES_OPTION) {
                 userSelect = true;
                 userCar = env.getCarName(3);
@@ -329,6 +336,7 @@ public class Display extends JFrame{
         }
         //makes the imgaes move. They also stop for 3 sec when they rech 650
         public void actionPerformed(ActionEvent e) {
+
             if(count<4) {
                 x1 = x1 + velX1;
                 x2 = x2 + velX2;
@@ -374,7 +382,22 @@ public class Display extends JFrame{
 //                repaint();
             }
             else {
-                text1.append(sk.findWinner());
+                text1.append(sk.getFinalRankList());
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Display.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                JOptionPane.showMessageDialog(null,sk.findWinner(),"Winner",JOptionPane.INFORMATION_MESSAGE);
+                int replay = JOptionPane.showConfirmDialog(null,"Would you like to play again?", "Restart", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+                if(replay == JOptionPane.YES_OPTION) {
+                    //code to restart the game
+
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,"Thanks for playing, Bye!");
+                    System.exit(0);
+                }
             }
         }
     }

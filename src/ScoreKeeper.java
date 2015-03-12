@@ -185,6 +185,11 @@ public class ScoreKeeper {
         return s;
     }//end of getSingleRaceScores
 
+
+    /**
+     * Finds the winner of the game
+     * @return
+     */
     public String findWinner(){
 
         //create a temp int array to get the number of cars per race
