@@ -128,13 +128,16 @@ public class Environment {
     }
 
     public int getSpeedOfCar(int race,int car){
-        int[] tempList;
-        tempList = carSpeeds.get(race);
-        int tempSpeed = tempList[car];
+        int tempSpeed = 0;
+        int[] tempSpeedList = new int[carNames.length];
+        if(carSpeeds.get(race)!=null) {
+            tempSpeedList = carSpeeds.get(race);
+            tempSpeed += tempSpeedList[car];
+        }
         return tempSpeed;
     }
 
-    private String speedsPrintOut() {
+    public String speedsPrintOut() {
         String s = "";
         int i = 0;
         for(int[] l: carSpeeds) {
@@ -151,15 +154,21 @@ public class Environment {
     }
 
 
+
     public Car[] getCar(){
         return garage;
     }
 
+    public ScoreKeeper getSK() {
+        return sk;
+    }
+//
 //    //test
 //    public static void main(String[] args) {
 //        Environment env = new Environment();
 //
-//        System.out.print(env.getCarName(3));
+////        System.out.print(env.getCarName(3));
 //        System.out.print(env.speedsPrintOut());
+//        System.out.print(env.getSpeedOfCar(0,2));
 //    }
 }//End of Environment.java

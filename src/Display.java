@@ -35,7 +35,7 @@ public class Display extends JFrame{
     private Environment env = new Environment();
     private RaceDisplay rd;
     private Car car;
-    private ScoreKeeper sk = new ScoreKeeper(4,4);
+    private ScoreKeeper sk = env.getSK();
 
     //check if user selected a car.
     private boolean userSelect = false;
@@ -169,7 +169,7 @@ public class Display extends JFrame{
             if (userSelect) {
 //                System.out.print(userCar);
                 Countdown c = new Countdown();
-                rd = new RaceDisplay();
+                rd = new RaceDisplay(sk);
                 add(rd);
                 revalidate();
                 repaint();
@@ -275,7 +275,8 @@ public class Display extends JFrame{
 
 
 
-        public RaceDisplay(){
+        public RaceDisplay(ScoreKeeper sk){
+            this.sk = sk;
 
             tm = new Timer(30,this);
             x1=0;
