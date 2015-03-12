@@ -16,6 +16,8 @@ public class ScoreKeeper {
     //storing the scores
     private ArrayList<int[]> scorePerRaceList;
     private ArrayList<Integer> finalRankList;
+
+    //storing the variables from Environment
     private ArrayList<int[]> carSpeeds;
     private String[] carNameList;
     private String[] trackNameList;
@@ -198,7 +200,7 @@ public class ScoreKeeper {
 
 
     //test
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
 //        ScoreKeeper sk = new ScoreKeeper(4,4);
 //        String[] carNames = {"BRITISH MOTOR COMPANY", "FAST AND FURIOUS", "SCOOBY GANG", "SPEEDY CADDY"};
 //        String[] trackNames = {"Boston", "New York", "Philidelphia", "Washington D.C."};
@@ -227,7 +229,7 @@ public class ScoreKeeper {
 //        System.out.print("\n"+sk.getAllRaceScores());
 //        System.out.print(sk.getAllRaceScores());
 //        System.out.print(sk.findWinner());
-        Display d = new Display();
-    }//end of test
+
+//    }//end of test
 
 }//End of ScoreKeeper.java

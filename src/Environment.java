@@ -43,10 +43,6 @@ public class Environment {
         sk.setTrackName(trackNames);
 
         sk.calculateRaceTime();
-        //display = new Display();
-        //display.setSpeeds(carSpeeds);
-        
-        //display.beginRace();
 
 
     }
