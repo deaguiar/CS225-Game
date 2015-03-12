@@ -22,7 +22,7 @@ public class Environment {
     ArrayList<int[]> carSpeeds;
     int[] trackLengths;
     
-    Display display;
+//    Display display;
 
     
       
@@ -40,7 +40,7 @@ public class Environment {
         sk.setCarNames(carNames);
         sk.setTrackName(trackNames);
         sk.setCarSpeeds(carSpeeds);
-        sk.setTrackName(trackNames);
+        sk.setTrackLength(trackLengths);
 
         sk.calculateRaceTime();
 
@@ -76,7 +76,7 @@ public class Environment {
                 tempSpeed[i] = randomSpeed;
 
 
-                System.out.println(car.getName() + " has speed " + car.getSpeed());
+//                System.out.println(car.getName() + " has speed " + car.getSpeed());
 
 
             }
@@ -84,7 +84,7 @@ public class Environment {
         }
 
 
-        System.out.println("\n");
+//        System.out.println("\n");
     }
 
     
@@ -116,7 +116,7 @@ public class Environment {
 //            System.out.println( track.getName() +" has length "+ track.getLength() );
         }
 
-        System.out.println("\n");
+//        System.out.println("\n");
     }
 
     public String getCarName(int i){

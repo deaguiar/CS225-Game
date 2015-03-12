@@ -1,10 +1,5 @@
-
-
-
+import java.awt.*;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -263,7 +258,7 @@ public class Display extends JFrame{
     */
     private class RaceDisplay extends JPanel implements ActionListener{
 
-        private   Image img1,img2,img3,img4,img5,img6;
+        private   Image img1,img2,img3,img4,img5,img6,img7,bk1,bk2,bk3,bk4;
         private JLabel l1;
         private int velX1,velX2,velX3,velX4;
         private int x1,x2,x3,x4;
@@ -272,6 +267,7 @@ public class Display extends JFrame{
         private ScoreKeeper sk;
         private Display d;
         ArrayList<String>resultString = new ArrayList<String>();
+        int count = 0;
 
 
 
@@ -283,7 +279,7 @@ public class Display extends JFrame{
             x2=0;
             x3=0;
             x4=0;
-
+            //change the first parameter with some sort of loop
             velX1=env.getSpeedOfCar(0,0);
             velX2=env.getSpeedOfCar(0,1);
             velX3=env.getSpeedOfCar(0,2);
@@ -299,7 +295,12 @@ public class Display extends JFrame{
             ImageIcon car3 = new ImageIcon("./images/car3-small.gif");
             ImageIcon car4 = new ImageIcon("./images/car4-small.gif");
             ImageIcon imgLine = new ImageIcon("./images/finish_line.png");
+            ImageIcon imgLine2 = new ImageIcon("./images/start_line.gif");
             ImageIcon imgBg = new ImageIcon("./images/starting_line.png");
+            ImageIcon bk1img = new ImageIcon("./images/Boston.png");
+            ImageIcon bk2img = new ImageIcon("./images/DC.png");
+            ImageIcon bk3img = new ImageIcon("./images/nyc.png");
+            ImageIcon bk4img = new ImageIcon("./images/Philly.png");
 
             img1 = car1.getImage();
             img2 = car2.getImage();
@@ -307,6 +308,11 @@ public class Display extends JFrame{
             img4= car4.getImage();
             img5 = imgLine.getImage();
             img6= imgBg.getImage();
+            img7 = imgLine2.getImage();
+            bk1 = bk1img.getImage();
+            bk2 = bk2img.getImage();
+            bk3 = bk3img.getImage();
+            bk4 = bk4img.getImage();
 
 
 
@@ -323,48 +329,53 @@ public class Display extends JFrame{
         }
         //makes the imgaes move. They also stop for 3 sec when they rech 650
         public void actionPerformed(ActionEvent e) {
-
-            x1=x1+velX1;
-            x2=x2+velX2;
-            x3=x3+velX3;
-            x4=x4+velX4;
-            repaint();
-
-
-            if(x1>=650){
-                velX1=0;
-            }
-            if(x2>=650){
-                velX2=0;
-            }
-            if(x3>=650){
-                velX3=0;
-            }
-            if(x4>=650){
-                velX4=0;
-            }
-            if (x1>=650 && x2>=650 && x3>=650 && x4>=650){//<---works
-
-                try {
-                    Thread.sleep(2500);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Display.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                text1.append(sk.getSingleRaceScores(0));
-
-                x1=0;
-                x2=0;
-                x3=0;
-                x4=0;
+            if(count<4) {
+                x1 = x1 + velX1;
+                x2 = x2 + velX2;
+                x3 = x3 + velX3;
+                x4 = x4 + velX4;
                 repaint();
 
-                velX1=env.getSpeedOfCar(0,0);
-                velX2=env.getSpeedOfCar(0,1);
-                velX3=env.getSpeedOfCar(0,2);
-                velX4=env.getSpeedOfCar(0,3);
-            }
-            repaint();
 
+                if (x1 >= 650) {
+                    velX1 = 0;
+                }
+                if (x2 >= 650) {
+                    velX2 = 0;
+                }
+                if (x3 >= 650) {
+                    velX3 = 0;
+                }
+                if (x4 >= 650) {
+                    velX4 = 0;
+                }
+                if (x1 >= 650 && x2 >= 650 && x3 >= 650 && x4 >= 650) {//<---works
+
+                    count++;
+                    text1.append(sk.getSingleRaceScores(0));
+
+                    try {
+                        Thread.sleep(2500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Display.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    x1 = 0;
+                    x2 = 0;
+                    x3 = 0;
+                    x4 = 0;
+                    repaint();
+                    //change the first value with an loop
+                    velX1 = env.getSpeedOfCar(0, 0);
+                    velX2 = env.getSpeedOfCar(0, 1);
+                    velX3 = env.getSpeedOfCar(0, 2);
+                    velX4 = env.getSpeedOfCar(0, 3);
+                }
+//                repaint();
+            }
+            else {
+                text1.append(sk.findWinner());
+            }
         }
     }
 }
